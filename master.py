@@ -18,9 +18,9 @@ class_file_path = './voc.names'
 dataset_path = './voc_train.txt'
 
 input_data = tf.placeholder(dtype=tf.float32, name='input_data')
-label_sbbox = tf.placeholder(dtype=tf.float32, name='label_sbbox')
-label_mbbox = tf.placeholder(dtype=tf.float32, name='label_mbbox')
-label_lbbox = tf.placeholder(dtype=tf.float32, name='label_lbbox')
+sbbox_label = tf.placeholder(dtype=tf.float32, name='label_sbbox')
+mbbox_label = tf.placeholder(dtype=tf.float32, name='label_mbbox')
+lbbox_label = tf.placeholder(dtype=tf.float32, name='label_lbbox')
 true_sbboxes = tf.placeholder(dtype=tf.float32, name='sbboxes')
 true_mbboxes = tf.placeholder(dtype=tf.float32, name='mbboxes')
 true_lbboxes = tf.placeholder(dtype=tf.float32, name='lbboxes')
@@ -508,9 +508,9 @@ decoded_sbbox = decode_bbox(output[2], anchors[0], strides[0])
 loss = custom_loss(
     output, 
     (decoded_lbbox, decoded_mbbox, decoded_sbbox),
-    label_sbbox, true_sbboxes,
-    label_mbbox, true_lbboxes,
-    label_lbbox, true_lbboxes
+    sbbox_label, true_sbboxes,
+    mbbox_label, true_lbboxes,
+    lbbox_label, true_lbboxes
 )
 
 # Optimizer
